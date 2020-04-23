@@ -2,6 +2,8 @@
 
 print('AppEngine Version: ' .. Engine.getVersion())
 
+local DELAY = 3000 -- ms between each type for demonstration purpose
+
 -- Creating viewer handle
 local v = View.create()
 
@@ -76,9 +78,9 @@ end
 local function main()
   -- Demonstrating the different graph options
   plotFunction()
-  Script.sleep(3000)
+  Script.sleep(DELAY)
   plotHistogram()
-  Script.sleep(3000)
+  Script.sleep(DELAY)
   plotSpiral()
   print('App finished.')
 end
