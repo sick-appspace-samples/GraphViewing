@@ -5,7 +5,7 @@ print('AppEngine Version: ' .. Engine.getVersion())
 local DELAY = 3000 -- ms between each type for demonstration purpose
 
 -- Creating viewer handle
-local v = View.create()
+local v = View.create("viewer2D1")
 
 --End of Global Scope-----------------------------------------------------------
 
