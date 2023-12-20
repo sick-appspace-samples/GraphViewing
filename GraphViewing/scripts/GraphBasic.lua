@@ -5,13 +5,13 @@ print('AppEngine Version: ' .. Engine.getVersion())
 local DELAY = 3000 -- ms between each type for demonstration purpose
 
 -- Creating viewer handle
-local v = View.create("viewer2D1")
+local v = View.create()
 
 --End of Global Scope-----------------------------------------------------------
 
 --Start of Function and Event Scope---------------------------------------------
 
--- Plot function f(x) = (x-2)^2 - 2
+---Plot function f(x) = (x-2)^2 - 2
 local function plotFunction()
   local x = {0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0}
   local y = {2.0, 0.25, -1.0, -1.75, -2.0, -1.75, -1.0, 0.25, 2.0, 4.25, 7.0}
@@ -19,24 +19,21 @@ local function plotFunction()
   -- Mark the minimum at x = 2.0 with a red cross
   local minimaPoint = Point.create(2.0, -2.0)
 
-  local pointDeco = View.ShapeDecoration.create()
-  pointDeco:setPointSize(0.3)
-  pointDeco:setPointType('CROSS')
-  pointDeco:setLineColor(255, 0, 0)
+  local pointDeco = View.ShapeDecoration.create():setPointSize(0.3)
+  pointDeco:setPointType('CROSS'):setLineColor(255, 0, 0)
 
   -- Create a GraphDecoration object for setting visual properties of the graph plot
-  local graphDeco = View.GraphDecoration.create()
+  local graphDeco = View.GraphDecoration.create():setAspectRatio('SQUARE')
   graphDeco:setLabels('x', 'f(x) = (x-2)² - 2')
-  graphDeco:setAspectRatio('SQUARE')
 
   -- Plot the function and overlay the minima point on the graph
   v:clear()
-  v:addGraph(y, x, graphDeco, 'graph')
-  v:addShape(minimaPoint, pointDeco, 'point', 'graph')
+  v:addGraph(y, x, graphDeco)
+  v:addShape(minimaPoint, pointDeco)
   v:present()
 end
 
- --Plot histogram of a Gaussian-shaped distribution
+---Plot histogram of a Gaussian-shaped distribution
 local function plotHistogram()
   local frequency, bin = {}, {}
   for t = -5.0, 5.0, 0.25 do
@@ -46,8 +43,7 @@ local function plotHistogram()
 
   -- Create a GraphDecoration object for setting visual properties of the graph plot
   local histogramDeco = View.GraphDecoration.create()
-  histogramDeco:setGraphType('BAR')
-  histogramDeco:setDrawSize(0.1)
+  histogramDeco:setGraphType('BAR'):setDrawSize(0.1)
 
   -- Plot the histogram
   v:clear()
@@ -55,10 +51,9 @@ local function plotHistogram()
   v:present()
 end
 
---Plot mathematical spiral in polar form (r, phi)
+---Plot mathematical spiral in polar form (r, phi)
 local function plotSpiral()
-  local r,
-    phi = {}, {}
+  local r, phi = {}, {}
   for t = 0, 12 * math.pi, 0.1 do
     table.insert(phi, t)
     table.insert(r, t * t)
@@ -66,12 +61,11 @@ local function plotSpiral()
 
   -- Create a GraphDecoration object, setting polar mode
   local polarDeco = View.GraphDecoration.create()
-  polarDeco:setPolarPlot(true)
-  polarDeco:setGraphColor(255, 0, 0)
+  polarDeco:setPolarPlot(true):setGraphColor(255, 0, 0)
 
   -- Plot the the spiral
   v:clear()
-  v:addGraph(r, phi, polarDeco, 'graph')
+  v:addGraph(r, phi, polarDeco)
   v:present()
 end
 
